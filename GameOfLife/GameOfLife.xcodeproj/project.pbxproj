@@ -13,6 +13,7 @@
 		BB21C03924EF2DBF00C1F803 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB21C03824EF2DBF00C1F803 /* Assets.xcassets */; };
 		BB21C03C24EF2DBF00C1F803 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB21C03A24EF2DBF00C1F803 /* LaunchScreen.storyboard */; };
 		BB21C04424EF33BB00C1F803 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB21C04324EF33BB00C1F803 /* HomeViewController.swift */; };
+		BB21C04824F0BB5900C1F803 /* CellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB21C04724F0BB5900C1F803 /* CellCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		BB21C03B24EF2DBF00C1F803 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB21C03D24EF2DBF00C1F803 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB21C04324EF33BB00C1F803 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BB21C04724F0BB5900C1F803 /* CellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				BB21C02F24EF2DBA00C1F803 /* AppDelegate.swift */,
+				BB21C04724F0BB5900C1F803 /* CellCollectionViewCell.swift */,
 				BB21C04324EF33BB00C1F803 /* HomeViewController.swift */,
 				BB21C03124EF2DBA00C1F803 /* SceneDelegate.swift */,
 				BB21C03524EF2DBA00C1F803 /* Main.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				BB21C03024EF2DBA00C1F803 /* AppDelegate.swift in Sources */,
 				BB21C03224EF2DBA00C1F803 /* SceneDelegate.swift in Sources */,
+				BB21C04824F0BB5900C1F803 /* CellCollectionViewCell.swift in Sources */,
 				BB21C04424EF33BB00C1F803 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
