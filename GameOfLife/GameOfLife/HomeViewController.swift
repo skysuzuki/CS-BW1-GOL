@@ -14,14 +14,37 @@ class HomeViewController: UIViewController {
 
     let game = GameOfLife(25, 25)
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(nextGeneration(notification:)), name: Notification.Name("nextGeneration"), object: nil)
         boardCollectionView.delegate = self
         boardCollectionView.dataSource = self
         // Do any additional setup after loading the view.
     }
-    
 
+    @objc func nextGeneration(notification: Notification) {
+        let data = notification.userInfo as? [String: [[Int]]]
+        guard let futureGrid = data?["future"] else { return }
+        for r in 0..<25 {
+            for c in 0..<25 {
+                let indexPath = IndexPath(row: (r * 25) + (c % 25), section: 0)
+                let cell = boardCollectionView.cellForItem(at: indexPath)
+                if futureGrid[r][c] == 1 {
+                    cell?.backgroundColor = .black
+                } else {
+                    cell?.backgroundColor = .white
+                }
+            }
+        }
+
+
+        print("NextGenerationFound")
+    }
+
+    @IBAction func playButtonPressed(_ button: UIButton) {
+        game.play()
+    }
     /*
     // MARK: - Navigation
 
@@ -69,6 +92,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.backgroundColor = .white
         } else {
             cell.isAlive = true
+            game.toggleCellAt(indexPath: indexPath)
             cell.backgroundColor = .black
         }
     }

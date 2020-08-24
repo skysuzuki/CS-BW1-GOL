@@ -50,11 +50,20 @@
                                     <constraint firstAttribute="bottom" secondItem="TMq-zV-9H3" secondAttribute="bottom" id="spQ-IN-cEx"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6I-le-Opn">
+                                <rect key="frame" x="192" y="678" width="30" height="30"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M3T-ab-GkB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="k6I-le-Opn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CBB-R4-ByX"/>
                             <constraint firstItem="ef1-8I-W8x" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fsw-hD-n6n"/>
                             <constraint firstItem="ef1-8I-W8x" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mNs-qU-h29"/>
+                            <constraint firstItem="k6I-le-Opn" firstAttribute="top" secondItem="ef1-8I-W8x" secondAttribute="bottom" constant="105" id="znT-Ha-Z9j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

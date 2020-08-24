@@ -11,5 +11,6 @@ import UIKit
 class CellCollectionViewCell: UICollectionViewCell {
 
     var isAlive = false
+
     
 }
