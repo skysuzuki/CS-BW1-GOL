@@ -72,7 +72,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CellCollectionViewCell else { return }
-        cell.isAlive = true
-        cell.backgroundColor = .black
+        if cell.isAlive {
+            cell.isAlive.toggle()
+            cell.backgroundColor = .white
+        } else {
+            cell.isAlive = true
+            cell.backgroundColor = .black
+        }
     }
 }
