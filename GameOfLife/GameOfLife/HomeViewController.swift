@@ -13,41 +13,37 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var boardCollectionView: UICollectionView!
 
     let game = GameOfLife(25, 25)
-
+    private var startGame = false
+    let nextGenerationGroup = DispatchGroup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(nextGeneration(notification:)), name: Notification.Name("nextGeneration"), object: nil)
         boardCollectionView.delegate = self
         boardCollectionView.dataSource = self
+        game.delegate = self
         // Do any additional setup after loading the view.
     }
 
-    @objc func nextGeneration(notification: Notification) {
-        let data = notification.userInfo as? [String: [[Int]]]
-        guard let futureGrid = data?["future"] else { return }
-        for r in 0..<25 {
-            for c in 0..<25 {
-                let indexPath = IndexPath(row: (r * 25) + (c % 25), section: 0)
-                let cell = boardCollectionView.cellForItem(at: indexPath)
-                if futureGrid[r][c] == 1 {
-                    cell?.backgroundColor = .black
-                } else {
-                    cell?.backgroundColor = .white
-                }
-            }
-        }
-
-
-        print("NextGenerationFound")
+    @IBAction func playButtonPressed(_ sender: Any) {
+        startGame = true
+        game.play()
+        //playGame()
     }
 
-    @IBAction func playButtonPressed(_ button: UIButton) {
-        game.play()
+    @IBAction func stopButtonPressed(_ sender: Any) {
+        startGame = false
+    }
+
+    func playGame() {
+        //self.game.play()
+//        while startGame {
+//            //self.nextGenerationGroup.enter()
+//            sleep(5)
+//            self.game.play()
+//        }
     }
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -79,9 +75,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let padding = sectionInsets.left * (25 + 1)
-//        let width = 250 - padding
-//        let widthPerItem = width / 25
         return CGSize(width: 10.0, height: 10.0)
     }
 
@@ -94,6 +87,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.isAlive = true
             game.toggleCellAt(indexPath: indexPath)
             cell.backgroundColor = .black
+        }
+    }
+}
+
+extension HomeViewController: GameOfLifeDelegate {
+    func nextGeneration(indexPath: IndexPath, alive: Int) {
+        guard let cell = boardCollectionView.cellForItem(at: indexPath) else { return }
+        if alive == 1 {
+            cell.backgroundColor = .black
+        } else {
+            cell.backgroundColor = .white
         }
     }
 }

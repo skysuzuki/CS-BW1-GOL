@@ -54,14 +54,23 @@
                                 <rect key="frame" x="192" y="678" width="30" height="30"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
-                                    <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M3T-ab-GkB"/>
+                                    <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FVA-jx-gZx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWg-3G-7bJ">
+                                <rect key="frame" x="191" y="716" width="32" height="30"/>
+                                <state key="normal" title="Stop"/>
+                                <connections>
+                                    <action selector="stopButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9gv-YH-hrS"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="k6I-le-Opn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CBB-R4-ByX"/>
+                            <constraint firstItem="ZWg-3G-7bJ" firstAttribute="top" secondItem="k6I-le-Opn" secondAttribute="bottom" constant="8" id="ESz-5T-BsV"/>
                             <constraint firstItem="ef1-8I-W8x" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fsw-hD-n6n"/>
+                            <constraint firstItem="ZWg-3G-7bJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kN4-eh-gIC"/>
                             <constraint firstItem="ef1-8I-W8x" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mNs-qU-h29"/>
                             <constraint firstItem="k6I-le-Opn" firstAttribute="top" secondItem="ef1-8I-W8x" secondAttribute="bottom" constant="105" id="znT-Ha-Z9j"/>
                         </constraints>

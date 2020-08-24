@@ -8,7 +8,13 @@
 
 import Foundation
 
+protocol GameOfLifeDelegate: AnyObject {
+    func nextGeneration(indexPath: IndexPath, alive: Int)
+}
+
 class GameOfLife {
+
+    weak var delegate: GameOfLifeDelegate?
 
     private var grid = [[Int]]()
 
@@ -56,6 +62,14 @@ class GameOfLife {
             }
         }
 
-        NotificationCenter.default.post(name: Notification.Name("nextGeneration"), object: self, userInfo: ["future": future])
+        for r in 0..<25 {
+            for c in 0..<25 {
+                let indexPath = IndexPath(row: (r * 25) + (c % 25), section: 0)
+                delegate?.nextGeneration(indexPath: indexPath, alive: future[r][c])
+            }
+        }
+        
+        print(future)
+        self.grid = future
     }
 }
