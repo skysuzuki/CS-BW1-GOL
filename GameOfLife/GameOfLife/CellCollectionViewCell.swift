@@ -10,6 +10,6 @@ import UIKit
 
 class CellCollectionViewCell: UICollectionViewCell {
 
-    let isAlive = false
+    var isAlive = false
     
 }

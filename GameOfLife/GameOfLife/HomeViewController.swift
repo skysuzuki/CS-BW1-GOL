@@ -12,12 +12,16 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var boardCollectionView: UICollectionView!
 
-    let count = 625
+    var grid = [[Int]]()
+    var column = 25
+    var row = 25
+    var count = 625
 
     override func viewDidLoad() {
         super.viewDidLoad()
         boardCollectionView.delegate = self
         boardCollectionView.dataSource = self
+        initializeGrid(row: row, column: column)
         // Do any additional setup after loading the view.
     }
     
@@ -31,6 +35,10 @@ class HomeViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    private func initializeGrid(row: Int, column: Int) {
+        grid = Array(repeating: Array(repeating: 0, count: row), count: column)
+    }
 
 }
 
@@ -60,5 +68,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 //        let width = 250 - padding
 //        let widthPerItem = width / 25
         return CGSize(width: 10.0, height: 10.0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CellCollectionViewCell else { return }
+        cell.isAlive = true
+        cell.backgroundColor = .black
     }
 }
