@@ -12,16 +12,12 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var boardCollectionView: UICollectionView!
 
-    var grid = [[Int]]()
-    var column = 25
-    var row = 25
-    var count = 625
+    let game = GameOfLife(25, 25)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         boardCollectionView.delegate = self
         boardCollectionView.dataSource = self
-        initializeGrid(row: row, column: column)
         // Do any additional setup after loading the view.
     }
     
@@ -36,15 +32,11 @@ class HomeViewController: UIViewController {
     }
     */
 
-    private func initializeGrid(row: Int, column: Int) {
-        grid = Array(repeating: Array(repeating: 0, count: row), count: column)
-    }
-
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return count
+        return game.count()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
