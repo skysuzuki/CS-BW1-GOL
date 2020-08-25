@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
 
     let game = GameOfLife(25, 25)
     private var startGame = false
-    let nextGenerationGroup = DispatchGroup()
+    // let nextGenerationGroup = DispatchGroup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,23 +25,14 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func playButtonPressed(_ sender: Any) {
-        startGame = true
-        game.play()
-        //playGame()
+        game.start()
     }
 
     @IBAction func stopButtonPressed(_ sender: Any) {
-        startGame = false
+        game.stop()
+        game.isRunning = false
     }
 
-    func playGame() {
-        //self.game.play()
-//        while startGame {
-//            //self.nextGenerationGroup.enter()
-//            sleep(5)
-//            self.game.play()
-//        }
-    }
     /*
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation

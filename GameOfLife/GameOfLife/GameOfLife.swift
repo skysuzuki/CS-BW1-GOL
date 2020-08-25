@@ -15,8 +15,10 @@ protocol GameOfLifeDelegate: AnyObject {
 class GameOfLife {
 
     weak var delegate: GameOfLifeDelegate?
+    var gameTimer: Timer?
 
     private var grid = [[Int]]()
+    var isRunning = false
 
     init(_ row: Int, _ column: Int) {
         grid = Array(repeating: Array(repeating: 0, count: row), count: column)
@@ -32,7 +34,18 @@ class GameOfLife {
         grid[row][column] = 1
     }
 
-    func play() {
+    func start() {
+        isRunning = true
+        playGame()
+    }
+
+    func stop() {
+        gameTimer?.invalidate()
+        gameTimer = nil
+        isRunning = false
+    }
+
+    func play(completion: @escaping ([[Int]]) -> Void) {
         var future = Array(repeating: Array(repeating: 0, count: 25), count: 25)
 
         for r in 1..<(25 - 1) {
@@ -62,14 +75,31 @@ class GameOfLife {
             }
         }
 
+        print(future)
+        self.grid = future
+
+        completion(future)
+    }
+
+    func buildNextGeneration(future: [[Int]]) {
         for r in 0..<25 {
             for c in 0..<25 {
                 let indexPath = IndexPath(row: (r * 25) + (c % 25), section: 0)
                 delegate?.nextGeneration(indexPath: indexPath, alive: future[r][c])
             }
         }
-        
-        print(future)
-        self.grid = future
+    }
+
+
+
+
+    func playGame() {
+        gameTimer?.invalidate()
+        gameTimer = nil
+        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            self.play { (future) in
+                self.buildNextGeneration(future: future)
+            }
+        }
     }
 }
