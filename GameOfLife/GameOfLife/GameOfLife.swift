@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameOfLifeDelegate: AnyObject {
-    func nextGeneration(indexPath: IndexPath, alive: Int)
+    func nextGeneration(indexPath: IndexPath, isAlive: Int)
 }
 
 class GameOfLife {
@@ -28,11 +28,15 @@ class GameOfLife {
         return grid.count * grid.count
     }
 
-    func toggleCellAt(indexPath: IndexPath) {
+    func toggleCellAt(indexPath: IndexPath, isAlive: Bool) {
         let row = Int(indexPath.row / 25)
         let column = indexPath.row % 25
-        grid[row][column] = 1
+        if isAlive { grid[row][column] = 0 } else {
+            grid[row][column] = 1
+        }
     }
+
+    // MARK: Game functions
 
     func start() {
         isRunning = true
@@ -45,7 +49,9 @@ class GameOfLife {
         isRunning = false
     }
 
-    func play(completion: @escaping ([[Int]]) -> Void) {
+    // MARK: Private functions
+
+    private func play(completion: @escaping ([[Int]]) -> Void) {
         var future = Array(repeating: Array(repeating: 0, count: 25), count: 25)
 
         for r in 1..<(25 - 1) {
@@ -75,25 +81,21 @@ class GameOfLife {
             }
         }
 
-        print(future)
         self.grid = future
 
         completion(future)
     }
 
-    func buildNextGeneration(future: [[Int]]) {
+    private func buildNextGeneration(future: [[Int]]) {
         for r in 0..<25 {
             for c in 0..<25 {
                 let indexPath = IndexPath(row: (r * 25) + (c % 25), section: 0)
-                delegate?.nextGeneration(indexPath: indexPath, alive: future[r][c])
+                delegate?.nextGeneration(indexPath: indexPath, isAlive: future[r][c])
             }
         }
     }
 
-
-
-
-    func playGame() {
+    private func playGame() {
         gameTimer?.invalidate()
         gameTimer = nil
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in

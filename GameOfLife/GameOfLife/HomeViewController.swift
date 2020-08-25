@@ -13,15 +13,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var boardCollectionView: UICollectionView!
 
     let game = GameOfLife(25, 25)
-    private var startGame = false
-    // let nextGenerationGroup = DispatchGroup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         boardCollectionView.delegate = self
         boardCollectionView.dataSource = self
         game.delegate = self
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func playButtonPressed(_ sender: Any) {
@@ -30,7 +27,6 @@ class HomeViewController: UIViewController {
 
     @IBAction func stopButtonPressed(_ sender: Any) {
         game.stop()
-        game.isRunning = false
     }
 
     /*
@@ -52,7 +48,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CellCollectionViewCell else { return UICollectionViewCell() }
 
-        cell.backgroundColor = .white
+        cell.isAlive = false
         cell.layer.borderWidth = 0.5
         return cell
     }
@@ -71,24 +67,16 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CellCollectionViewCell else { return }
-        if cell.isAlive {
-            cell.isAlive.toggle()
-            cell.backgroundColor = .white
-        } else {
-            cell.isAlive = true
-            game.toggleCellAt(indexPath: indexPath)
-            cell.backgroundColor = .black
-        }
+
+        game.toggleCellAt(indexPath: indexPath, isAlive: cell.isAlive)
+        cell.isAlive.toggle()
     }
 }
 
 extension HomeViewController: GameOfLifeDelegate {
-    func nextGeneration(indexPath: IndexPath, alive: Int) {
-        guard let cell = boardCollectionView.cellForItem(at: indexPath) else { return }
-        if alive == 1 {
-            cell.backgroundColor = .black
-        } else {
-            cell.backgroundColor = .white
-        }
+    func nextGeneration(indexPath: IndexPath, isAlive: Int) {
+        guard let cell = boardCollectionView.cellForItem(at: indexPath) as? CellCollectionViewCell else { return }
+
+        cell.isAlive = Bool(truncating: isAlive as NSNumber)
     }
 }

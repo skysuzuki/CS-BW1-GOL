@@ -10,7 +10,12 @@ import UIKit
 
 class CellCollectionViewCell: UICollectionViewCell {
 
-    var isAlive = false
+    var isAlive = false {
+        didSet {
+            if isAlive { self.backgroundColor = .black }
+            else { self.backgroundColor = .white }
+        }
+    }
 
     
 }
