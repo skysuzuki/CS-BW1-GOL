@@ -10,10 +10,12 @@ import UIKit
 
 class CellCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var icon: UILabel!
+    
     var isAlive = false {
         didSet {
-            if isAlive { self.backgroundColor = .black }
-            else { self.backgroundColor = .white }
+            if isAlive { self.icon.text = "🦠"/*self.backgroundColor = .black*/ }
+            else { self.icon.text = "☠️"/*self.backgroundColor = .white*/ }
         }
     }
 

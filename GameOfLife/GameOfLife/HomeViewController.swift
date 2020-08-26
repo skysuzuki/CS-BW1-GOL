@@ -11,13 +11,16 @@ import UIKit
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var boardCollectionView: UICollectionView!
+    @IBOutlet weak var boardView: UIView!
 
     let game = GameOfLife(25, 25)
+    private let cellSize = 14.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         boardCollectionView.delegate = self
         boardCollectionView.dataSource = self
+        boardView.layer.borderWidth = 1.0
         game.delegate = self
     }
 
@@ -49,7 +52,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CellCollectionViewCell else { return UICollectionViewCell() }
 
         cell.isAlive = false
-        cell.layer.borderWidth = 0.5
         return cell
     }
 
@@ -62,7 +64,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 10.0, height: 10.0)
+        return CGSize(width: cellSize, height: cellSize)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

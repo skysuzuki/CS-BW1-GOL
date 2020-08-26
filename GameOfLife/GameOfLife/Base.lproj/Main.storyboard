@@ -17,25 +17,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ef1-8I-W8x">
-                                <rect key="frame" x="82" y="323" width="250" height="250"/>
+                                <rect key="frame" x="32" y="273" width="350" height="350"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TMq-zV-9H3">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OLO-C2-EhJ">
-                                            <size key="itemSize" width="10" height="10"/>
+                                            <size key="itemSize" width="14" height="14"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="1vz-8E-ezG" customClass="CellCollectionViewCell" customModule="GameOfLife" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="i2T-8O-7ny">
-                                                    <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="☠️" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhg-rx-yth">
+                                                            <rect key="frame" x="0.5" y="1.5" width="13" height="11"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="fhg-rx-yth" firstAttribute="centerY" secondItem="i2T-8O-7ny" secondAttribute="centerY" id="9PW-XL-smR"/>
+                                                        <constraint firstItem="fhg-rx-yth" firstAttribute="centerX" secondItem="i2T-8O-7ny" secondAttribute="centerX" id="mGe-VD-oC9"/>
+                                                    </constraints>
                                                 </collectionViewCellContentView>
+                                                <size key="customSize" width="14" height="14"/>
+                                                <connections>
+                                                    <outlet property="icon" destination="fhg-rx-yth" id="hAW-kG-IAY"/>
+                                                </connections>
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
@@ -44,21 +60,21 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="TMq-zV-9H3" secondAttribute="trailing" id="Ga6-G0-lAI"/>
                                     <constraint firstItem="TMq-zV-9H3" firstAttribute="top" secondItem="ef1-8I-W8x" secondAttribute="top" id="I1y-Pe-inK"/>
-                                    <constraint firstAttribute="height" constant="250" id="OB1-rP-Ffe"/>
+                                    <constraint firstAttribute="height" constant="350" id="OB1-rP-Ffe"/>
                                     <constraint firstItem="TMq-zV-9H3" firstAttribute="leading" secondItem="ef1-8I-W8x" secondAttribute="leading" id="Rba-BW-hdI"/>
-                                    <constraint firstAttribute="width" constant="250" id="pRe-jE-V8a"/>
+                                    <constraint firstAttribute="width" constant="350" id="pRe-jE-V8a"/>
                                     <constraint firstAttribute="bottom" secondItem="TMq-zV-9H3" secondAttribute="bottom" id="spQ-IN-cEx"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6I-le-Opn">
-                                <rect key="frame" x="192" y="678" width="30" height="30"/>
+                                <rect key="frame" x="192" y="728" width="30" height="30"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
                                     <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FVA-jx-gZx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWg-3G-7bJ">
-                                <rect key="frame" x="191" y="716" width="32" height="30"/>
+                                <rect key="frame" x="191" y="766" width="32" height="30"/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
                                     <action selector="stopButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9gv-YH-hrS"/>
@@ -78,6 +94,7 @@
                     </view>
                     <connections>
                         <outlet property="boardCollectionView" destination="TMq-zV-9H3" id="nh4-0R-omu"/>
+                        <outlet property="boardView" destination="ef1-8I-W8x" id="RKC-C9-yLF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
