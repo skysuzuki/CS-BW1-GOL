@@ -15,6 +15,7 @@
 		BB21C04424EF33BB00C1F803 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB21C04324EF33BB00C1F803 /* HomeViewController.swift */; };
 		BB21C04824F0BB5900C1F803 /* CellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB21C04724F0BB5900C1F803 /* CellCollectionViewCell.swift */; };
 		BB21C04A24F41B8B00C1F803 /* GameOfLife.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB21C04924F41B8A00C1F803 /* GameOfLife.swift */; };
+		BBD83C6424F716D30010489D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD83C6324F716D30010489D /* AboutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		BB21C04324EF33BB00C1F803 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BB21C04724F0BB5900C1F803 /* CellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCollectionViewCell.swift; sourceTree = "<group>"; };
 		BB21C04924F41B8A00C1F803 /* GameOfLife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLife.swift; sourceTree = "<group>"; };
+		BBD83C6324F716D30010489D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				BB21C04324EF33BB00C1F803 /* HomeViewController.swift */,
 				BB21C04924F41B8A00C1F803 /* GameOfLife.swift */,
 				BB21C03124EF2DBA00C1F803 /* SceneDelegate.swift */,
+				BBD83C6324F716D30010489D /* AboutViewController.swift */,
 				BB21C03524EF2DBA00C1F803 /* Main.storyboard */,
 				BB21C03824EF2DBF00C1F803 /* Assets.xcassets */,
 				BB21C03A24EF2DBF00C1F803 /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD83C6424F716D30010489D /* AboutViewController.swift in Sources */,
 				BB21C04A24F41B8B00C1F803 /* GameOfLife.swift in Sources */,
 				BB21C03024EF2DBA00C1F803 /* AppDelegate.swift in Sources */,
 				BB21C03224EF2DBA00C1F803 /* SceneDelegate.swift in Sources */,
