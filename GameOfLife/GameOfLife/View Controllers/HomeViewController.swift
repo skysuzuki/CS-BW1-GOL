@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var boardCollectionView: UICollectionView!
     @IBOutlet weak var boardView: UIView!
     @IBOutlet weak var generationsLabel: UILabel!
+    @IBOutlet weak var playButton: UIButton!
 
     let game = GameOfLife(25, 25)
     private let cellSize = 14.0
@@ -25,16 +26,28 @@ class HomeViewController: UIViewController {
         game.delegate = self
     }
 
-    @IBAction func playButtonPressed(_ sender: Any) {
-        game.start()
+    private func updateViews() {
+        if game.isRunning {
+            playButton.setTitle("Pause", for: .normal)
+        } else {
+            playButton.setTitle("Play", for: .normal)
+        }
     }
 
-    @IBAction func stopButtonPressed(_ sender: Any) {
-        game.stop()
+    @IBAction func playButtonPressed(_ sender: Any) {
+        if game.isRunning { game.stop() }
+        else { game.start() }
+        updateViews()
+    }
+
+    @IBAction func resetButtonPressed(_ sender: Any) {
+        game.reset()
+        updateViews()
     }
 
     @IBAction func preset1ButtonPressed(_ sender: Any) {
         game.preset1()
+        updateViews()
     }
 
 }

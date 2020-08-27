@@ -24,11 +24,11 @@ class AboutViewController: UIViewController {
 
     private func updateViews() {
         rulesTextView.text = """
-        For any live cell\n
+        For any live cell - 🦠\n
         1. If it has fewer than two live neighbors dies, as if by underpopulation.\n
         2. If it has two or three live neighbors lives to next generation.\n
         3. If it has three or more live neighbors dies from overpopulation.\n\n
-        For any dead cell\n
+        For any dead cell - ☠️\n
         1. If if has three live neighbors becomes alive from reproduction
         """
 

@@ -63,9 +63,14 @@ class GameOfLife {
         stop()
         self.grid = Array(repeating: Array(repeating: 0, count: self.row), count: self.column)
         generations = 0
+        buildNextGeneration(future: self.grid)
+
     }
 
     func preset1() {
+        if isRunning {
+            reset()
+        }
         for num in preset1Arr {
             toggleCellAt(index: num, isAlive: false)
             delegate?.nextGeneration(indexPath: [0, num], isAlive: 1)
@@ -105,7 +110,7 @@ class GameOfLife {
         }
 
         self.grid = future
-
+        generations += 1
         completion(future)
     }
 
@@ -116,7 +121,6 @@ class GameOfLife {
                 delegate?.nextGeneration(indexPath: indexPath, isAlive: future[r][c])
             }
         }
-        generations += 1
         delegate?.generationDidFinish(count: generations)
     }
 
