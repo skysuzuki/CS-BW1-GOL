@@ -7,17 +7,19 @@
 //
 
 import Foundation
+import UIKit
 
 protocol GameOfLifeDelegate: AnyObject {
     func nextGeneration(indexPath: IndexPath, isAlive: Int)
     func generationDidFinish(count: Int)
+    func foundNoNewGenerations(generations: Int, title: String)
 }
 
 class GameOfLife {
 
     weak var delegate: GameOfLifeDelegate?
-    var gameTimer: Timer?
-    var generations = 0
+    private var gameTimer: Timer?
+    private var generations = 0
     private let preset1Arr = [411, 386, 388, 413, 362, 337, 312, 287, 311, 335, 309,
                               313, 339, 365, 261, 236, 211, 212, 213, 238, 263]
 
@@ -64,7 +66,6 @@ class GameOfLife {
         self.grid = Array(repeating: Array(repeating: 0, count: self.row), count: self.column)
         generations = 0
         buildNextGeneration(future: self.grid)
-
     }
 
     func preset1() {
@@ -79,7 +80,7 @@ class GameOfLife {
 
     // MARK: Private functions
 
-    private func play(completion: @escaping ([[Int]]) -> Void) {
+    private func play() {
         var future = Array(repeating: Array(repeating: 0, count: self.row), count: self.column)
 
         for r in 1..<(self.row - 1) {
@@ -109,9 +110,15 @@ class GameOfLife {
             }
         }
 
-        self.grid = future
-        generations += 1
-        completion(future)
+        if future == Array(repeating: Array(repeating: 0, count: self.row), count: self.column) {
+            delegate?.foundNoNewGenerations(generations: generations, title: "Population has died out")
+        } else if future == self.grid {
+            delegate?.foundNoNewGenerations(generations: generations, title: "No new generations can be formed")
+        } else {
+            self.grid = future
+            generations += 1
+        }
+        buildNextGeneration(future: future)
     }
 
     private func buildNextGeneration(future: [[Int]]) {
@@ -128,9 +135,8 @@ class GameOfLife {
         gameTimer?.invalidate()
         gameTimer = nil
         gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            self.play { (future) in
-                self.buildNextGeneration(future: future)
+                self.play()
             }
         }
-    }
 }
+

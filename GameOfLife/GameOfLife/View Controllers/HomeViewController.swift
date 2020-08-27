@@ -89,6 +89,17 @@ extension HomeViewController: GameOfLifeDelegate {
         generationsLabel.text = "Generations: \(count)"
     }
 
+    func foundNoNewGenerations(generations: Int, title: String) {
+        game.stop()
+        let alert = UIAlertController(title: title, message: "Total generations: \(generations)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel) { _ in
+            self.game.reset()
+            self.updateViews()
+        })
+
+        present(alert, animated: true, completion: nil)
+    }
+
     func nextGeneration(indexPath: IndexPath, isAlive: Int) {
         guard let cell = boardCollectionView.cellForItem(at: indexPath) as? CellCollectionViewCell else { return }
 
