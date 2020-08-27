@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var boardCollectionView: UICollectionView!
     @IBOutlet weak var boardView: UIView!
+    @IBOutlet weak var generationsLabel: UILabel!
 
     let game = GameOfLife(25, 25)
     private let cellSize = 14.0
@@ -32,14 +33,9 @@ class HomeViewController: UIViewController {
         game.stop()
     }
 
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func preset1ButtonPressed(_ sender: Any) {
+        game.preset1()
     }
-    */
 
 }
 
@@ -70,12 +66,16 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CellCollectionViewCell else { return }
 
-        game.toggleCellAt(indexPath: indexPath, isAlive: cell.isAlive)
+        game.toggleCellAt(index: indexPath.row, isAlive: cell.isAlive)
         cell.isAlive.toggle()
     }
 }
 
 extension HomeViewController: GameOfLifeDelegate {
+    func generationDidFinish(count: Int) {
+        generationsLabel.text = "Generations: \(count)"
+    }
+
     func nextGeneration(indexPath: IndexPath, isAlive: Int) {
         guard let cell = boardCollectionView.cellForItem(at: indexPath) as? CellCollectionViewCell else { return }
 

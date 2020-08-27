@@ -10,27 +10,37 @@ import Foundation
 
 protocol GameOfLifeDelegate: AnyObject {
     func nextGeneration(indexPath: IndexPath, isAlive: Int)
+    func generationDidFinish(count: Int)
 }
 
 class GameOfLife {
 
     weak var delegate: GameOfLifeDelegate?
     var gameTimer: Timer?
+    var generations = 0
+    private let preset1Arr = [411, 386, 388, 413, 362, 337, 312, 287, 311, 335, 309,
+                              313, 339, 365, 261, 236, 211, 212, 213, 238, 263]
 
     private var grid = [[Int]]()
+    private var row = 0
+    private var column = 0
     var isRunning = false
 
     init(_ row: Int, _ column: Int) {
+        self.row = row
+        self.column = column
         grid = Array(repeating: Array(repeating: 0, count: row), count: column)
     }
+
+    // MARK: Helper functions
 
     func count() -> Int {
         return grid.count * grid.count
     }
 
-    func toggleCellAt(indexPath: IndexPath, isAlive: Bool) {
-        let row = Int(indexPath.row / 25)
-        let column = indexPath.row % 25
+    func toggleCellAt(index: Int, isAlive: Bool) {
+        let row = Int(index / self.row)
+        let column = index % self.column
         if isAlive { grid[row][column] = 0 } else {
             grid[row][column] = 1
         }
@@ -49,13 +59,26 @@ class GameOfLife {
         isRunning = false
     }
 
+    func reset() {
+        stop()
+        self.grid = Array(repeating: Array(repeating: 0, count: self.row), count: self.column)
+        generations = 0
+    }
+
+    func preset1() {
+        for num in preset1Arr {
+            toggleCellAt(index: num, isAlive: false)
+            delegate?.nextGeneration(indexPath: [0, num], isAlive: 1)
+        }
+    }
+
     // MARK: Private functions
 
     private func play(completion: @escaping ([[Int]]) -> Void) {
-        var future = Array(repeating: Array(repeating: 0, count: 25), count: 25)
+        var future = Array(repeating: Array(repeating: 0, count: self.row), count: self.column)
 
-        for r in 1..<(25 - 1) {
-            for c in 1..<(25 - 1) {
+        for r in 1..<(self.row - 1) {
+            for c in 1..<(self.column - 1) {
                 var aliveNeighbors = 0
                 for i in -1...1 {
                     for j in -1...1 {
@@ -89,10 +112,12 @@ class GameOfLife {
     private func buildNextGeneration(future: [[Int]]) {
         for r in 0..<25 {
             for c in 0..<25 {
-                let indexPath = IndexPath(row: (r * 25) + (c % 25), section: 0)
+                let indexPath = IndexPath(row: (r * self.row) + (c % self.column), section: 0)
                 delegate?.nextGeneration(indexPath: indexPath, isAlive: future[r][c])
             }
         }
+        generations += 1
+        delegate?.generationDidFinish(count: generations)
     }
 
     private func playGame() {

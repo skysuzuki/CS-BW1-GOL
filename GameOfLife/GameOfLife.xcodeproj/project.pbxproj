@@ -62,18 +62,26 @@
 		BB21C02E24EF2DBA00C1F803 /* GameOfLife */ = {
 			isa = PBXGroup;
 			children = (
+				BB7D8E8D24F82822002B1F5F /* View Controllers */,
 				BB21C02F24EF2DBA00C1F803 /* AppDelegate.swift */,
 				BB21C04724F0BB5900C1F803 /* CellCollectionViewCell.swift */,
-				BB21C04324EF33BB00C1F803 /* HomeViewController.swift */,
 				BB21C04924F41B8A00C1F803 /* GameOfLife.swift */,
 				BB21C03124EF2DBA00C1F803 /* SceneDelegate.swift */,
-				BBD83C6324F716D30010489D /* AboutViewController.swift */,
 				BB21C03524EF2DBA00C1F803 /* Main.storyboard */,
 				BB21C03824EF2DBF00C1F803 /* Assets.xcassets */,
 				BB21C03A24EF2DBF00C1F803 /* LaunchScreen.storyboard */,
 				BB21C03D24EF2DBF00C1F803 /* Info.plist */,
 			);
 			path = GameOfLife;
+			sourceTree = "<group>";
+		};
+		BB7D8E8D24F82822002B1F5F /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BB21C04324EF33BB00C1F803 /* HomeViewController.swift */,
+				BBD83C6324F716D30010489D /* AboutViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
